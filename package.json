@@ -1,0 +1,19 @@
+{
+  "name": "sn-api",
+  "version": "1.0.0",
+  "description": "API REST with NodejS, Mongo, Express and JWT for a social network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coolhatena/social-network-api.git"
+  },
+  "author": "Eduardo Rivera Geffroy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Coolhatena/social-network-api/issues"
+  },
+  "homepage": "https://github.com/Coolhatena/social-network-api#readme"
+}
