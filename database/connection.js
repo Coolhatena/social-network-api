@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
+require('dotenv').config()
 
 const connection = async () => {
 	try {
-		// TODO: Get mongo connection string from .env
-		await mongoose.connect("/social_network", {});
+		await mongoose.connect(process.env.MONGO_CONNECTION_STRING + "/social_network", {});
 		console.log("Connected to DB")
 	} catch (error) {
 		console.log(error);
