@@ -11,3 +11,7 @@ const port = 3900;
 
 // Configure CORS
 app.use(cors());
+
+// Transform received data to JSON
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
