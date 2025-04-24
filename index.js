@@ -23,3 +23,8 @@ app.get("/testroute", (req, res) => {
 		"message": "API working swiftly"
 	})
 });
+
+// Listen to HTTP requests
+app.listen(port, () => {
+	console.log(`Server running at ${port}`)
+})
