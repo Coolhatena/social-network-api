@@ -2,6 +2,11 @@ const connection = require("./database/connection");
 const express = require("express");
 const cors = require('cors');
 
+// Load routes
+const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
+const followRoutes = require("./routes/follow");
+
 // DB connection
 connection();
 
@@ -15,6 +20,11 @@ app.use(cors());
 // Transform received data to JSON
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
+
+// Use routes
+app.use("/api", userRoutes);
+app.use("/api", postRoutes);
+app.use("/api", followRoutes);
 
 // Test route
 app.get("/testroute", (req, res) => {
