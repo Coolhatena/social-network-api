@@ -13,5 +13,6 @@ const register = (req, res) => {
 }
 
 module.exports = {
-	testUser
+	testUser,
+	register
 }
