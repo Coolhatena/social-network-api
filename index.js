@@ -22,9 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 // Use routes
-app.use("/api", userRoutes);
-app.use("/api", postRoutes);
-app.use("/api", followRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/follow", followRoutes);
 
 // Test route
 app.get("/testroute", (req, res) => {
