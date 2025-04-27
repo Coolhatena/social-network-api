@@ -19,8 +19,9 @@ const register = (req, res) => {
 		})
 	}
 
-	const userCached = new User(params);
+	const userCached = new User(params); // Potential registered user
 	try {
+		// Validate that email or nickname is not already registered
 		const duplicatedUser = User.find({
 			$or: [
 				{ email: userCached.email.toLowerCase()},
