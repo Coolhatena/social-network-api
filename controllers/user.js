@@ -49,8 +49,8 @@ const register = async (req, res) => {
 
 		return res.status(200).json({
 			status: "success",
-			message: "Action - Register user",
-			potentialUser
+			message: "User registered successfully",
+			userSaved
 		});
 	} catch (err) {
 		return res.status(500).json({
