@@ -26,8 +26,7 @@ const UserSchema = Schema({
 		default: "role_user"
 	},
 	image: {
-		type: String,
-		required: true
+		type: String
 	},
 	created_at: {
 		type: Date,
