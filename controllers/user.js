@@ -19,13 +19,13 @@ const register = (req, res) => {
 		})
 	}
 
-	const userCached = new User(params); // Potential registered user
+	const potentialUser = new User(params);
 	try {
 		// Validate that email or nickname is not already registered
 		const duplicatedUser = User.find({
 			$or: [
-				{ email: userCached.email.toLowerCase()},
-				{ nick: userCached.nick.toLowerCase()}
+				{ email: potentialUser.email.toLowerCase()},
+				{ nick: potentialUser.nick.toLowerCase()}
 			]
 		}).exec()
 
@@ -41,7 +41,7 @@ const register = (req, res) => {
 		return res.status(200).json({
 			status: "success",
 			message: "Action - Register user",
-			userCached
+			potentialUser
 		})
 	} catch (err) {
 		return res.status(500).json({
