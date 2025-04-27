@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const bcrypt = require('bcrypt');
 
 // Mock action
 const testUser = (req, res) => {
@@ -35,6 +36,10 @@ const register = (req, res) => {
 				message: "This user already",
 			})
 		}
+
+		bcrypt.hash(potentialUser.password, 10, (error, pwdHash) => {
+			potentialUser.password = pwdHash;
+		});
 
 
 
