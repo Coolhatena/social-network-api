@@ -9,7 +9,7 @@ const testUser = (req, res) => {
 }
 
 // Register
-const register = (req, res) => {
+const register = async (req, res) => {
 	const params = req.body;
 
 	if (!params.name || !params.nick || !params.email || !params.password) {
@@ -20,29 +20,26 @@ const register = (req, res) => {
 		})
 	}
 
-	const potentialUser = new User(params);
 	try {
 		// Validate that email or nickname is not already registered
-		const duplicatedUser = User.find({
+		const duplicatedUser = await User.find({
 			$or: [
-				{ email: potentialUser.email.toLowerCase()},
-				{ nick: potentialUser.nick.toLowerCase()}
+				{ email: params.email.toLowerCase()},
+				{ nick: params.nick.toLowerCase()}
 			]
 		}).exec()
-
+		
 		if (duplicatedUser && duplicatedUser.length >= 1){
 			return res.status(400).json({
 				status: "error",
 				message: "This user already",
 			})
 		}
-
-		bcrypt.hash(potentialUser.password, 10, (error, pwdHash) => {
-			potentialUser.password = pwdHash;
-		});
-
-
-
+		
+		const pwdHash = await bcrypt.hash(params.password, 10);
+		params.password = pwdHash;
+		
+		const potentialUser = new User(params);
 		return res.status(200).json({
 			status: "success",
 			message: "Action - Register user",
