@@ -40,6 +40,14 @@ const register = async (req, res) => {
 		params.password = pwdHash;
 		
 		const potentialUser = new User(params);
+		const userSaved = potentialUser.save();
+		if (!userSaved) {
+			return res.status(500).json({
+				status: "error",
+				message: "Internal server error",
+			});
+		}
+
 		return res.status(200).json({
 			status: "success",
 			message: "Action - Register user",
