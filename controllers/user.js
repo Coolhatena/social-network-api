@@ -72,7 +72,7 @@ const login = async (req, res) => {
 
 	try {
 
-		const user = await User.findone({email: params.email}).exec();
+		const user = await User.findOne({email: params.email}).select({"password": 0}).exec();
 		if (!user){
 			return res.status(400).json({
 				status: "error",
