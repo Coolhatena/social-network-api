@@ -31,7 +31,7 @@ const register = async (req, res) => {
 		if (duplicatedUser && duplicatedUser.length >= 1){
 			return res.status(400).json({
 				status: "error",
-				message: "This user already",
+				message: "This user already exists",
 			});
 		}
 		
@@ -72,7 +72,7 @@ const login = async (req, res) => {
 
 	try {
 
-		const user = await User.findOne({email: params.email}).exec();
+		const user = await User.findone({email: params.email}).exec();
 		if (!user){
 			return res.status(400).json({
 				status: "error",
