@@ -71,8 +71,9 @@ const login = async (req, res) => {
 	}
 
 	try {
-
-		const user = await User.findOne({email: params.email}).select({"password": 0}).exec();
+		const user = await User.findOne({email: params.email})
+								.select({"password": 0})
+								.exec();
 		if (!user){
 			return res.status(400).json({
 				status: "error",
@@ -92,8 +93,6 @@ const login = async (req, res) => {
 			message: "Internal server error",
 		});
 	}
-
-
 }
 
 module.exports = {
