@@ -60,11 +60,40 @@ const register = async (req, res) => {
 	}
 }
 
-const login = (req, res) => {
-	return res.status(200).send({
-		status: "success",
-		message: "Action - User Login"
-	})
+const login = async (req, res) => {
+	const params = req.body;
+	if (!params.email || !params.password) {
+		console.log("FAILED VALIDATION")
+		return res.status(400).json({
+			status: "error",
+			message: "Incomplete data"
+		});
+	}
+
+	try {
+
+		const user = await User.findOne({email: params.email}).exec();
+		if (!user){
+			return res.status(400).json({
+				status: "error",
+				message: "User does not exists",
+			});
+		}
+		
+		return res.status(200).send({
+			status: "success",
+			message: "Action - User Login",
+			user
+		})
+	} catch (err) {
+		console.log(err)
+		return res.status(500).json({
+			status: "error",
+			message: "Internal server error",
+		});
+	}
+
+
 }
 
 module.exports = {
