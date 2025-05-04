@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
+const jwt = require('../services/jwt')
 
 // Mock action
 const testUser = (req, res) => {
@@ -87,7 +88,7 @@ const login = async (req, res) => {
 			});	
 		}
 
-		const token = false;
+		const token = jwt.createToken(user);
 		
 		return res.status(200).send({
 			status: "success",
@@ -96,7 +97,8 @@ const login = async (req, res) => {
 				id: user._id,
 				name: user.name,
 				nick: user.nick
-			}
+			},
+			token
 		})
 	} catch (err) {
 		console.log(err)
