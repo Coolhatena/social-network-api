@@ -13,7 +13,7 @@ exports.auth = (req, res, next) => {
 		});
 	}
 
-	let token = req.req.headers.authorization.replace(/['"]+/, '');
+	let token = req.headers.authorization.replace(/['"]+/, '');
 	try {
 		let payload = jwt.decode(token, secret);
 		if (payload.exp <= moment().unix()) {
@@ -22,6 +22,8 @@ exports.auth = (req, res, next) => {
 				message: 'Expired token',
 			});
 		}
+		
+		req.user = payload;
 	} catch (error) {
 		return res.status(404).send({
 			status: "error",
@@ -29,7 +31,6 @@ exports.auth = (req, res, next) => {
 		});
 	}
 
-	req.user = payload;
 
 	next();
 }
