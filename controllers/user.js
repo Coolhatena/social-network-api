@@ -71,20 +71,32 @@ const login = async (req, res) => {
 	}
 
 	try {
-		const user = await User.findOne({email: params.email})
-								.select({"password": 0})
-								.exec();
+		const user = await User.findOne({email: params.email}).exec();
 		if (!user){
 			return res.status(400).json({
 				status: "error",
 				message: "User does not exists",
 			});
 		}
+
+		const pwd = bcrypt.compareSync(params.password, user.password);
+		if (!pwd) {
+			return res.status(400).json({
+				status: "error",
+				message: "Invalid login credentials",
+			});	
+		}
+
+		const token = false;
 		
 		return res.status(200).send({
 			status: "success",
 			message: "Action - User Login",
-			user
+			user: {
+				id: user._id,
+				name: user.name,
+				nick: user.nick
+			}
 		})
 	} catch (err) {
 		console.log(err)
