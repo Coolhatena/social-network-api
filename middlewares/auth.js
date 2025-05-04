@@ -22,7 +22,6 @@ exports.auth = (req, res, next) => {
 				message: 'Expired token',
 			});
 		}
-		
 		req.user = payload;
 	} catch (error) {
 		return res.status(404).send({
@@ -30,7 +29,6 @@ exports.auth = (req, res, next) => {
 			message: "Invalid token",
 		});
 	}
-
 
 	next();
 }
