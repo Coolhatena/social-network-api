@@ -22,5 +22,6 @@ const createToken = () => {
 }
 
 module.exports = {
-	createToken
+	secret,
+	createToken,
 }
