@@ -5,7 +5,8 @@ const jwt = require('../services/jwt')
 // Mock action
 const testUser = (req, res) => {
 	return res.status(200).send({
-		message: "Message sent from controllers/user.js"
+		message: "Message sent from controllers/user.js",
+		user: req.user
 	});
 }
 
