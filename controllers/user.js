@@ -80,6 +80,7 @@ const login = async (req, res) => {
 			});
 		}
 
+		// Check if user password is correct
 		const pwd = bcrypt.compareSync(params.password, user.password);
 		if (!pwd) {
 			return res.status(400).json({
