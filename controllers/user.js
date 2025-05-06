@@ -111,8 +111,27 @@ const login = async (req, res) => {
 	}
 }
 
+const getProfile = async (req, res) => {
+	const id = req.params.id;
+	const userProfile = await User.findById(id)
+									.select({ password: false, role: false })
+									.exec();
+	if (!userProfile) {
+		return res.status(404).send({
+			status: "error",
+			message: "The user you are trying get does not exist or there is a problem with the profile"
+		});
+	}
+
+	return res.status(200).send({
+		status: "success",
+		user: userProfile
+	});
+}
+
 module.exports = {
 	testUser,
+	getProfile,
 	register,
-	login
+	login,
 }
