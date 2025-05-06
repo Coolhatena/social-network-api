@@ -123,6 +123,7 @@ const getProfile = async (req, res) => {
 		});
 	}
 
+	// TODO: Return following info
 	return res.status(200).send({
 		status: "success",
 		user: userProfile
