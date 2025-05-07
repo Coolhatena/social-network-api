@@ -130,9 +130,17 @@ const getProfile = async (req, res) => {
 	});
 }
 
+const listUsers = (req, res) => {
+	return res.status(200).send({
+		status: "success",
+		message: "ACTION - list users"
+	});
+}
+
 module.exports = {
 	testUser,
 	getProfile,
+	listUsers,
 	register,
 	login,
 }
