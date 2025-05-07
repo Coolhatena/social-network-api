@@ -131,18 +131,38 @@ const getProfile = async (req, res) => {
 	});
 }
 
-const listUsers = (req, res) => {
-	let page = 1;
-	if (req.params.page) {
-		page = parseInt(req.params.page);
+const listUsers = async (req, res) => {
+	try {
+		let page = 1;
+		if (req.params.page) {
+			page = parseInt(req.params.page);
+		}
+
+		const itemsPerPage = 5;
+		const totalUsers = await User.countDocuments({}).exec();
+		const paginatedUsers = await User.find().sort('_id').paginate(page, itemsPerPage).exec();
+
+		if (!paginatedUsers) {
+			return res.status(404).send({
+				status: "error",
+				message: "No users available"
+			});
+		}
+
+		return res.status(200).send({
+			status: "success",
+			users,
+			page,
+			itemsPerPage,
+			totalUsers,
+			pages: false,
+		});
+	} catch (error) {
+		return res.status(500).send({
+			status: "error",
+			message: "Internal Server Error"
+		});
 	}
-
-
-
-	return res.status(200).send({
-		status: "success",
-		message: "ACTION - list users"
-	});
 }
 
 module.exports = {
