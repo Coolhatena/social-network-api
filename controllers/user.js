@@ -151,13 +151,14 @@ const listUsers = async (req, res) => {
 
 		return res.status(200).send({
 			status: "success",
-			users,
+			paginatedUsers,
 			page,
 			itemsPerPage,
 			totalUsers,
 			pages: false,
 		});
 	} catch (error) {
+		console.log(error);
 		return res.status(500).send({
 			status: "error",
 			message: "Internal Server Error"
