@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('../services/jwt');
+const mongoosePagination = require('mongoose-pagination');
 
 // Mock action
 const testUser = (req, res) => {
@@ -131,6 +132,13 @@ const getProfile = async (req, res) => {
 }
 
 const listUsers = (req, res) => {
+	let page = 1;
+	if (req.params.page) {
+		page = parseInt(req.params.page);
+	}
+
+
+
 	return res.status(200).send({
 		status: "success",
 		message: "ACTION - list users"
