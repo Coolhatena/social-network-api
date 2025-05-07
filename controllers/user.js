@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
-const jwt = require('../services/jwt')
+const jwt = require('../services/jwt');
 
 // Mock action
 const testUser = (req, res) => {
