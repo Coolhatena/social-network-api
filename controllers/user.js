@@ -155,7 +155,7 @@ const listUsers = async (req, res) => {
 			page,
 			itemsPerPage,
 			totalUsers,
-			pages: false,
+			pages: Math.ceil(totalUsers / itemsPerPage),
 		});
 	} catch (error) {
 		console.log(error);
